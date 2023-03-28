@@ -7,7 +7,7 @@ pipeline{
                 script {
                 def packageJson = readJSON file: 'nodeapp/package.json'
                 def packageVersion = packageJson.version
-                def currentVersion="${packageVersion}-${BUILD_NUMBER}"
+                env.currentVersion="${packageVersion}.${BUILD_NUMBER}"
                 echo "${currentVersion}"
             }
             }
@@ -16,7 +16,7 @@ pipeline{
          stage("building"){
             steps{
                 echo "========stage building ========"
-                sh "docker build -t mar97/simple_node_app:${currentVersion} ."
+                sh "docker build -t mar97/simple_node_app:$currentVersion ."
             }
         }
 
@@ -26,7 +26,7 @@ pipeline{
                     echo "========stage deployment ========"
                     withCredentials([usernamePassword(credentialsId: 'github-cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
                         sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
-                        sh "docker push mar97/node_app:1.1"
+                        sh "docker push mar97/node_app:$currentVersion"
                     }
 
                 }   
