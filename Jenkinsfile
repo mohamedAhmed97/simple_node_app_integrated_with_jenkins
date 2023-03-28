@@ -4,8 +4,12 @@ pipeline{
     stages{
         stage("preparation"){
             steps{
-                echo "========stage preparation ========"
-                echo "1.0.$BUILD_NUMBER"
+                script {
+                def packageJson = readJSON file: 'nodeapp/package.json'
+                def packageVersion = packageJson.version
+                def currentVersion="${packageVersion}-${BUILD_NUMBER}"
+                echo "${currentVersion}"
+            }
             }
         }
 
