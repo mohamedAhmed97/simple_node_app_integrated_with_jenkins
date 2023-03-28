@@ -5,6 +5,7 @@ pipeline{
         stage("preparation"){
             steps{
                 echo "========stage preparation ========"
+                echo "$BUILD_NUMBER"
             }
         }
 
