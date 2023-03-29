@@ -32,6 +32,19 @@ pipeline{
                 }   
             }
         }
+         stage("pushing to repo"){
+            steps{
+                script{
+                        sh "npm version $currentVersion"
+                        sshagent (credentials: ['github-cred']) {
+                            sh "git add ."
+                            sh 'git commit -m "ci: version bumb "'
+                            sh 'git remote set-url origin git@github.com:mohamedAhmed97/simple_node_app_integrated_with_jenkins.git'
+                            sh 'git push origin HEAD:master'
+                        }
+                    }
+            }
+        }
     }
     post{
         always{
