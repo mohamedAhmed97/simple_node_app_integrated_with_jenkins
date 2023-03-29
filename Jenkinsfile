@@ -35,7 +35,9 @@ pipeline{
          stage("pushing to repo"){
             steps{
                 script{
+                        sh 'cd nodeapp'
                         sh "npm version $currentVersion"
+                        sh "cd .."
                         sshagent (credentials: ['github-cred']) {
                             sh "git add ."
                             sh 'git commit -m "ci: version bumb "'
