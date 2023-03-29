@@ -39,6 +39,8 @@ pipeline{
                             sh "npm version $currentVersion"
                         }
                         sshagent (credentials: ['github-cred']) {
+                            sh 'git config --global user.email "user@jenkins.com"'
+                            sh 'git config --global user.name "Jenkins"'
                             sh "git add ."
                             sh 'git commit -m "ci: version bumb "'
                             sh 'git remote set-url origin git@github.com:mohamedAhmed97/simple_node_app_integrated_with_jenkins.git'
