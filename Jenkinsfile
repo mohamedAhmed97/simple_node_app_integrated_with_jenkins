@@ -44,7 +44,7 @@ pipeline{
                             sh "git add ."
                             sh 'git commit -m "ci: version bumb "'
                             sh 'git remote set-url origin git@github.com:mohamedAhmed97/simple_node_app_integrated_with_jenkins.git'
-                            sh 'git push origin HEAD:master'
+                            sh 'git push origin master'
                         }
                     }
             }
