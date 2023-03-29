@@ -6,7 +6,7 @@ pipeline{
             steps{
                 script {
                 def packageJson = readJSON file: 'nodeapp/package.json'
-                def packageVersion = packageJson.version.substring(0, packageJson.version.length() - 1)
+                def packageVersion = packageJson.version.substring(0, packageJson.version.length() - 2)
                 env.currentVersion="${packageVersion}.${BUILD_NUMBER}"
                 echo "${currentVersion}"
             }
