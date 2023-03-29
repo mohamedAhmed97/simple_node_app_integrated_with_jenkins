@@ -26,7 +26,7 @@ pipeline{
                     echo "========stage deployment ========"
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
                         sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
-                        sh "docker push mar97/node_app:$currentVersion"
+                        sh "docker push mar97/simple_node_app:$currentVersion"
                     }
 
                 }   
